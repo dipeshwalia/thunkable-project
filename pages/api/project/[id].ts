@@ -83,7 +83,6 @@ export default async function projectHandler(
       })
       break
     case "DELETE":
-      console.log(project)
       if (!project) {
         res.status(404).end()
         return

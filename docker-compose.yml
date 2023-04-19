@@ -6,7 +6,7 @@ services:
     build:
       context: .
     volumes:
-      - ./src:/app/src
+      - ./data:/app/data
       - ./public:/app/public
     restart: always
     ports:

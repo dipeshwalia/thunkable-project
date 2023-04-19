@@ -5,7 +5,6 @@ export const fetchResHelper = async (res: Response) => {
       const body = await res.json()
       throw { message: body.message, code: body.code }
     } catch (error: any) {
-      console.log(error)
       // if we can't read the error message, throw the status text
       throw {
         message: error?.message ?? res.statusText,

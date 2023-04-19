@@ -43,3 +43,29 @@ The app uses the following APIs:
 ``` PUT /api/projects/:id```
 
 
+
+### known issues
+
+- To respect the time constrain vs feature set, the app does not have a login system. This means that anyone can delete or edit any project. This is not recommended for production apps.
+- The design is not 100% matching the design in the mockup. This is due to time constraints. I will be updating the design in the future.
+
+### feature list
+
+- [x] List all projects
+- [x] Add a new project
+- [x] Edit a project
+- [x] Delete a project
+- [x] Drag and drop to reorder projects
+- [ ] Persist drag and drop order
+- [ ] Add a login system
+- [ ] Add a search system
+
+
+### Notes
+
+The idea is to demonstrate my ability to build a full stack app. I have tried using atomic design principles to build the app. I have used the following technologies:
+
+- [Next.js](https://nextjs.org/) - A React framework
+- [React](https://reactjs.org/) - A JavaScript library for building user interfaces
+- [Ant Design](https://ant.design/) - A React UI library
+- [Docker](https://www.docker.com/) - A containerization platform
