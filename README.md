@@ -19,3 +19,27 @@ git clone
 cd thunkable
 pnpm install
 ```
+
+### Running the app
+
+To run the app, run the following command:
+
+```
+pnpm dev
+```
+
+or use docker compose 
+
+```
+docker-compose up
+```
+
+### API used 
+
+The app uses the following APIs:
+``` GET /api/projects```
+``` POST /api/projects/new``` 
+``` DELETE /api/projects/:id ```
+``` PUT /api/projects/:id```
+
+
