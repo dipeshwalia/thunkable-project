@@ -3,7 +3,9 @@ import { saveToFile } from "utils/server/saveTofile"
 import { fetchResHelper } from "utils/client/fetchResHelper"
 import path from "path"
 import { Project } from "../projects"
-const projects = require("data/projects.json")
+import data from "data/projects.json"
+let projects: Project[] = data
+
 
 export const updateProject = async ({
   id,
@@ -37,8 +39,8 @@ export const createProject = async (description: string) => {
   return fetchResHelper(res)
 }
 
-const findProject = (id: string): Project | null => {
-  if (!id) return null
+const findProject = (id: string): Project | undefined => {
+  if (!id) return undefined
   return projects.find((project: any) => Number(project.id) === Number(id))
 }
 

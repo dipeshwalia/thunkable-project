@@ -44,10 +44,14 @@ The app uses the following APIs:
 
 
 
-### known issues
+### Running the tests
 
-- To respect the time constrain vs feature set, the app does not have a login system. This means that anyone can delete or edit any project. This is not recommended for production apps.
-- The design is not 100% matching the design in the mockup. This is due to time constraints. I will be updating the design in the future.
+To run the tests, run the following command:
+
+```
+pnpm test
+```
+
 
 ### feature list
 

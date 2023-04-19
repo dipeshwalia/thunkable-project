@@ -3,14 +3,15 @@ import { useQuery } from "@tanstack/react-query"
 import { fetchResHelper } from "utils/client/fetchResHelper"
 
 export type Project = {
-  id: string
+  id: string | number
   description: string
   order: number
   createdAt: string
   updatedAt: string
 }
 
-const projects = require("data/projects.json")
+import data from "data/projects.json"
+let projects: Project[] = data
 
 const listProject = async () => {
   const res = await fetch(`/api/projects`, {
