@@ -6,7 +6,6 @@ import { Project } from "../projects"
 import data from "data/projects.json"
 let projects: Project[] = data
 
-
 export const updateProject = async ({
   id,
   description,
@@ -14,29 +13,26 @@ export const updateProject = async ({
   id: string
   description: string
 }) => {
-  const res = await fetch(`/api/project/${id}`, {
+  return fetchResHelper<null>({
+    url: `/api/project/${id}`,
     method: "PUT",
     body: JSON.stringify({ description }),
   })
-
-  return fetchResHelper(res)
 }
 
 export const deleteProject = async ({ id }: { id: string }) => {
-  const res = await fetch(`/api/project/${id}`, {
+  return fetchResHelper<null>({
+    url: `/api/project/${id}`,
     method: "DELETE",
   })
-
-  return fetchResHelper(res)
 }
 
 export const createProject = async (description: string) => {
-  const res = await fetch(`/api/project/new`, {
+  return fetchResHelper<Project>({
+    url: `/api/project/new`,
     method: "POST",
     body: JSON.stringify({ description }),
   })
-
-  return fetchResHelper(res)
 }
 
 const findProject = (id: string): Project | undefined => {
@@ -60,7 +56,7 @@ export default async function projectHandler(
         res.status(405).end(`Method ${method} Not Allowed`)
         return
       }
-      const { description: desc } = JSON.parse(req.body)
+      const { description: desc } = req.body
       if (!desc) {
         return res.status(400).json({
           message: "description is required",
@@ -78,11 +74,7 @@ export default async function projectHandler(
 
       projects.push(newProject)
       await saveToFile({ projects }, projectFilePath)
-
-      res.status(200).json({
-        message: "Project created successfully",
-        code: 200,
-      })
+      res.status(201).json(newProject)
       break
     case "DELETE":
       if (!project) {
@@ -93,14 +85,14 @@ export default async function projectHandler(
         (project: any) => Number(project.id) !== Number(id)
       )
       await saveToFile({ projects: updateProjects }, projectFilePath)
-      res.status(204)
+      res.status(204).end() 
       break
     case "PUT":
       if (!project) {
         res.status(404).end()
         return
       }
-      const { description } = JSON.parse(req.body)
+      const { description } = req.body
       if (!description) {
         return res.status(400).json({
           message: "description is required",
@@ -111,6 +103,7 @@ export default async function projectHandler(
 
       Object.assign(project, { description })
       await saveToFile({ projects }, projectFilePath)
+      res.status(204).end()
       break
     default:
       res.setHeader("Allow", ["GET", "PUT"])

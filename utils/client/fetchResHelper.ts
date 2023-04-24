@@ -1,4 +1,23 @@
-export const fetchResHelper = async (res: Response) => {
+export async function fetchResHelper<T>({
+  url,
+  method = "GET",
+  body,
+}: {
+  url: string
+  method?: string
+  body?: string
+}): Promise<T> {
+  const res = await fetch(url, {
+    method,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    ...(body
+      ? {
+          body,
+        }
+      : undefined),
+  })
   if (!res.ok) {
     try {
       // try to read the error message from the response body
@@ -8,9 +27,10 @@ export const fetchResHelper = async (res: Response) => {
       // if we can't read the error message, throw the status text
       throw {
         message: error?.message ?? res.statusText,
-        code: error.code || res.status,
+        code: Number(error.code || res.status),
       }
     }
+  } else {
+    return res.json()
   }
-  return res
 }

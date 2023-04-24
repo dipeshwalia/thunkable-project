@@ -1,7 +1,7 @@
 import { Typography } from "antd"
 import Image from "next/image"
+import { Project } from "pages/api/projects"
 import styled from "styled-components"
-import { ProjectItemType } from "components/organisms/ProjectList"
 
 const ProjectNameWrapper = styled.div`
   display: flex;
@@ -32,7 +32,7 @@ function ProjectInfo({
   project,
   onEdit,
 }: {
-  project: ProjectItemType
+  project: Project
   onEdit?: ({ description, id }: { description: string; id: string }) => any
 }) {
   return (

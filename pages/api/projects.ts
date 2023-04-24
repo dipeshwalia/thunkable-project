@@ -14,16 +14,21 @@ import data from "data/projects.json"
 let projects: Project[] = data
 
 const listProject = async () => {
-  const res = await fetch(`/api/projects`, {
+  const res = await fetchResHelper<Project[]>({
+    url: "/api/projects",
     method: "GET",
   })
-
-  const data = await fetchResHelper(res)
-  return data.json()
+  return res
 }
 
 export const useGetProjects = () =>
-  useQuery<any, any>(["projects"], listProject)
+  useQuery<
+    Project[],
+    {
+      message: string
+      code: number
+    }
+  >(["projects"], listProject)
 
 export default async function getAnalysisAPI(
   req: NextApiRequest,
