@@ -38,7 +38,7 @@ const ProjectList = (props: { projects: ProjectItemType[] }) => {
         moveCard={moveCard}
       />
     )
-  }, [])
+  }, [moveCard])
 
   return (
     <>
